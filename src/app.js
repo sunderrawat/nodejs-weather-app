@@ -8,14 +8,13 @@ const forecast = require('./utils/forecast');
 const publicDirPath = path.join(__dirname, '../public');
 
 const app = express();
+const port = process.env.PORT || 3000;
+
 app.set('views', path.join(__dirname, '../templates/views')); //if you get an error than run this command
 app.set('view engine', 'hbs');
 
 hbs.registerPartials(path.join(__dirname, '../templates/partials'));
 console.log(path.join(__dirname, '../views'));
-app.listen(3000, () => {
-  console.log('app is started on port 3000');
-});
 
 //static page load
 app.use(express.static(publicDirPath));
@@ -77,6 +76,10 @@ app.get('*', (req, res) => {
     title: '404 Error !',
     name: 'Sunder Rawat',
   });
+});
+
+app.listen(port, () => {
+  console.log(`app is started on port ${port}`);
 });
 
 //express routing
